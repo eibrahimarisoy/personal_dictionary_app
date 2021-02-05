@@ -1,4 +1,3 @@
-my_app.db
 .DS_Store
 .env
 .flaskenv
