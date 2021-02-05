@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+<h2 class="text-center mt-2">User Dashboard</h2>
+{% if not g.user.can_practice %}
+  <h5 class="text-center mt-2">Please add at least 10 words to your dictionary by searching. Then "Practice" will be available.</h5>
+{% endif %}
+
+<table class="table table-striped mt-2">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Word Title</th>
+            <th scope="col">Search Count</th>
+            <th scope="col">Practicing Point</th>
+            <th scope="col">Appearance Count</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in content.words %}
+        <tr>
+            <th class="col-1" scope="row">{{loop.index}}</th>
+            <td class="col-5">
+                <a href="{{  url_for('word.details', id=item.id) }}">
+                    {{item.Word.title}}</a>
+            </td>
+            <td class="col-2">{{item.search_count}}</td>
+            <td class="col-2">{{item.practice_point}}</td>
+            <td class="col-2">{{item.appearance_count}}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+
+
+
+{%endblock %}

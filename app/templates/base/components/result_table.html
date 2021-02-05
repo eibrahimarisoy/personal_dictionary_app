@@ -1,0 +1,32 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Definition</th>
+            <th scope="col">Part of Speech</th>
+            <th scope="col">Synonyms</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if content.definitions %}
+        {% for definition in content.definitions %}
+        <tr>
+            <th class="col-1" scope="row">{{loop.index}}</th>
+            <td class="col-6">{{definition.content}}</td>
+            <td class="col-2">{{definition.part_of_speech}}</td>
+            <td class="col-3">
+                {% for i in definition.synonyms %}
+                *{{i.title}} <br>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <h2 class="text-center">
+                The word you were looking for was not found.
+            </h2>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>

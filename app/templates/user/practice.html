@@ -1,0 +1,134 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base/base.html" %}
+{% set active_page = "register" %}
+{% block content %}
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="result"></h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <p>Definition : <span id="q_definition"></span></p>
+        </div>
+        <div class="row">
+          <p>Answer : "<span id="exact_word"></span>"</p>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="continue" class="btn btn-secondary" data-bs-dismiss="modal">Continue</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h3 class="text-center mt-3">Word Practice Page</h3>
+<hr>
+
+
+<div class="container mt-3">
+  <h4><span class="font-weight-bold">Definition:</span> <span class="text-center" id="definition"></span>
+  </h4>
+  <hr>
+  <div class="row justify-content-center">
+
+    <div class="col-md-3">
+      <button type="button" class="btn btn-success btn-lg" id="first">
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-success btn-lg" id="second">
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-success btn-lg" id="third">
+      </button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="d-flex justify-content-center">
+
+      <a id="start" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Start Practicing</a>
+
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="d-flex justify-content-center">
+
+      <a href="{{ url_for('word.exit_practice' )}}" id="exit" class="btn btn-danger btn-md active" role="button"
+        aria-pressed="true">Exit Practice</a>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+<script>
+
+  $(document).ready(function () {
+
+    $('#exit, #first, #second, #third').hide();
+
+  });
+
+  $('#start, #continue').click(start_practice);
+  function start_practice() {
+    $("#start").hide();
+    $('#exit, #first, #second, #third').show();
+    $.ajax({
+      url: '/word/practicing',
+      type: 'GET',
+      success: function (data) {
+        $('#definition').text(data.querying_definition);
+        $('#first').text(data.first_word);
+        $('#second').text(data.second_word);
+        $('#third').text(data.third_word);
+
+
+      },
+      dataType: 'json',
+    });
+  }
+
+
+  $('#first, #second, #third').click(submit);
+
+  function submit() {
+    words = [$('#first').text(), $('#second').text(), $('#third').text()]
+    $.ajax({
+      url: '/word/check',
+      type: 'POST',
+      data: {
+        "querying_definition": $('#definition').text(),
+        "answer": $(this).text(),
+        "words": words
+      },
+
+      success: function (data) {
+
+        $('#result').text(data.result)
+        $('#q_definition').text(data.definition)
+        $('#exact_word').text(data.word)
+        $('#staticBackdrop').modal('show');
+
+      },
+      dataType: 'json',
+    });
+
+
+  }
+
+</script>
+
+{%endblock %}

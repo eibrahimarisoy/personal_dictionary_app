@@ -1,0 +1,39 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base/base.html" %}
+{% block content %}
+
+<h2 class="mt-2 text-center">{{ content.word.title }}</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Definition</th>
+            <th scope="col">Part of Speech</th>
+            <th scope="col">Synonyms</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in content.word.definitions %}
+
+        <tr>
+            <th class="col-1" scope="row">{{loop.index}}</th>
+            <td class="col-6">{{item.content}}</td>
+            <td class="col-2">{{item.part_of_speech}}</td>
+            <td class="col-3">
+                {% for i in item.synonyms %}
+                *{{i.title}} <br>
+
+                {% endfor %}
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+
+
+{%endblock %}
