@@ -10,7 +10,7 @@ class DefaultConfig(object):
         self.SECRET_KEY = "flask-todo"
         self.URL = "https://wordsapiv1.p.rapidapi.com/words/"
         self.HEADERS = {
-            "x-rapidapi-key" : "ea984abe36mshc37249eb762f7eep168c23jsn27f2181447c3",
+            "x-rapidapi-key" : "",
             "x-rapidapi-host" : "wordsapiv1.p.rapidapi.com"
         }
 
