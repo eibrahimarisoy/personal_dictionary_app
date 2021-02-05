@@ -1,11 +1,8 @@
-from flask import Flask, Blueprint
-from flask.helpers import url_for
-from werkzeug.utils import redirect
+from flask import Flask
 from config import configuration
 from flask_bootstrap import Bootstrap
 from flask import session, g
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, MigrateCommand
 
 
 app = Flask(__name__, template_folder='templates')
@@ -24,10 +21,6 @@ def before_request():
 @app.after_request
 def after_request(response):
     return response
-
-
-
-
 
 
 from app.models.default import Base

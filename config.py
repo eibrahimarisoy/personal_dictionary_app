@@ -1,16 +1,16 @@
 import os
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class DefaultConfig(object):
     def __init__(self):
         self.DEBUG = True
-        self.SQLALCHEMY_DATABASE_URI = 'sqlite://///home/emre/Documents/calismalar/moneytolia/dict_memo_app/my_app.db' 
-        self.DATABASE_CONNECT_OPTIONS = {}
+        self.SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'my_app.db') 
         self.SQLALCHEMY_TRACK_MODIFICATIONS = False
         self.SECRET_KEY = "flask-todo"
         self.URL = "https://wordsapiv1.p.rapidapi.com/words/"
         self.HEADERS = {
-            "x-rapidapi-key" : "",
+            "x-rapidapi-key" : "YOUR_API_KEY",
             "x-rapidapi-host" : "wordsapiv1.p.rapidapi.com"
         }
 

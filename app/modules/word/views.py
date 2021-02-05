@@ -3,11 +3,11 @@ import random
 
 import requests
 from app import db
-from app.helpers.decarators import login_required
+from app.helpers.decorators import login_required
 from app.models import Synonym, UserDict, Word
 from app.models.definition import Definition
 from app.models.user import User
-from flask import (Blueprint, flash, g, redirect, render_template,
+from flask import (Blueprint, g, redirect, render_template,
                    request, url_for)
 from sqlalchemy.sql.expression import func
 from config import configuration

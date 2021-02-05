@@ -1,5 +1,5 @@
 from app import db
-from app.helpers.decarators import login_required
+from app.helpers.decorators import login_required
 from app.models import User
 from app.models.user_dict import UserDict
 from app.modules.user.forms import ChangePasswordForm, LoginForm, RegisterForm
