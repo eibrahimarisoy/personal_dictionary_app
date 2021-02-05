@@ -33,9 +33,10 @@ from app.models.user_dict import UserDict
 db.create_all()
 db.session.commit()
 
-
+from app.modules.default.views import module as default
 from app.modules.user.views import module as user
 from app.modules.word.views import module as word
 
+app.register_blueprint(default)
 app.register_blueprint(user)
 app.register_blueprint(word)
